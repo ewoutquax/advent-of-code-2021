@@ -1,0 +1,2 @@
+require "submarine"
+require "puzzle"
