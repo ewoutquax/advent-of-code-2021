@@ -1,9 +1,7 @@
 class Submarine
   attr_reader :horizontal, :depth
 
-  def initialize(use_aim)
-    @use_aim = use_aim
-
+  def initialize()
     @depth = 0
     @horizontal = 0
     @aim = 0
@@ -12,15 +10,20 @@ class Submarine
   def execute_step(step)
     motion, value = step.split(" ")
 
-    case motion
-    when "forward"
-      @horizontal += value.to_i
+    self.send(motion.to_sym, value.to_i)
+  end
 
-      @use_aim && @depth += @aim * value.to_i
-    when "up"
-      @use_aim ? @aim -= value.to_i : @depth -= value.to_i
-    when "down"
-      @use_aim ? @aim += value.to_i : @depth += value.to_i
-    end
+  private
+
+  def forward(value)
+    @horizontal += value
+  end
+
+  def up(value)
+    @depth -= value
+  end
+
+  def down(value)
+    @depth += value
   end
 end

@@ -1,10 +1,8 @@
 module Puzzle
   class << self
     def location_after_steps(steps = nil, use_aim = false)
-      steps ||= read_file()
-
-      submarine = Submarine.new(use_aim)
-      steps.each { |step| submarine.execute_step(step) }
+      submarine = (use_aim) ? SubmarineWithAim.new : Submarine.new
+      (steps || read_file()).each { |step| submarine.execute_step(step) }
 
       submarine.horizontal * submarine.depth
     end
