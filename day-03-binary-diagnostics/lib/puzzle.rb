@@ -13,27 +13,19 @@ module Puzzle
     end
 
     def get_gamma(report_lines)
-      Binary.to_decimal(
-        build_binary_on_most_common_char(report_lines)
-      )
+      build_binary_on_most_common_char(report_lines).to_i(2)
     end
 
     def get_epsilon(report_lines)
-      Binary.to_decimal(
-        build_binary_on_least_common_char(report_lines)
-      )
+      build_binary_on_least_common_char(report_lines).to_i(2)
     end
 
     def get_oxygen(report_lines)
-      Binary.to_decimal(
-        filter_binary_on_most_common_char(report_lines)
-      )
+      filter_binary_on_most_common_char(report_lines).to_i(2)
     end
 
     def get_co2(report_lines)
-      Binary.to_decimal(
-        filter_binary_on_least_common_char(report_lines)
-      )
+      filter_binary_on_least_common_char(report_lines).to_i(2)
     end
 
     private

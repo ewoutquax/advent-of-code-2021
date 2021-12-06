@@ -1,2 +1,1 @@
-require "binary"
 require "puzzle"
