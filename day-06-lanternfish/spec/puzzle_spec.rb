@@ -30,7 +30,7 @@ RSpec.describe Puzzle do
 
     it "solve puzzle" do
       output = Puzzle.number_of_fish_after_days(256)
-      expect(output).to eq(1_675_781_200_288)
+      expect(output).to eq("ewout")
     end
   end
 end

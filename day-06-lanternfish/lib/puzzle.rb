@@ -1,12 +1,9 @@
 module Puzzle
   class << self
     def number_of_fish_after_days(days, input = nil)
-      fishes = (input || read_file())
-      school = School.new(fishes)
+      school = School.new(input || read_file())
 
-      days.times do |day|
-        school.pass_day
-      end
+      days.times { |day| school.pass_day }
 
       school.grouped.values.sum
     end
