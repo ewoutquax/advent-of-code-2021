@@ -1,0 +1,2 @@
+require "location"
+require "puzzle"
