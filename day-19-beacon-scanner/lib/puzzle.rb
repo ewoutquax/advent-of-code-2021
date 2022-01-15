@@ -3,13 +3,7 @@ module Puzzle
     def count_unique_beacons(lines = nil)
       groups = lines || read_file
 
-      scanner0, other_scanners = convert_locations_to_scanner0(groups)
-
-      t = other_scanners.map { |s| "#{s.number}: #{s.location.join(',')}" }
-      puts ''
-      puts 'Scanner locations'
-      puts '-----------------'
-      puts t
+      scanner0, _other_scanners = convert_locations_to_scanner0(groups)
 
       scanner0.beacons.length
     end
@@ -20,16 +14,17 @@ module Puzzle
       scanner0, other_scanners = convert_locations_to_scanner0(groups)
 
       all_scanners = other_scanners + [scanner0]
+      t = all_scanners.map { |s| "#{s.number}: #{s.location.join(',')}" }
+      puts ''
+      puts 'Scanner locations'
+      puts '-----------------'
+      puts t
 
-      max = 0
-      all_scanners.each do |scanner_from|
-        all_scanners.each do |scanner_to|
-          distance = Helpers.manhattan_distance(scanner_from, scanner_to)
-          max < distance && max = distance
+      all_scanners.map do |scanner_from|
+        all_scanners.map do |scanner_to|
+          Helpers.manhattan_distance(scanner_from, scanner_to)
         end
-      end
-
-      max
+      end.flatten.max
     end
 
     private
@@ -41,6 +36,7 @@ module Puzzle
 
       while other_scanners.any? { |scanner| scanner.converted == false }
         other_scanners.select { |s| s.converted == false }.each do |scanner|
+          puts "Find matching beacons for scanner '#{scanner.number}'"
           result = scanner.find_matching_beacons_from_scanner0(scanner0)
 
           result == :no_matches and next
